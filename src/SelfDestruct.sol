@@ -17,7 +17,6 @@ contract SelfDestruct {
 
     constructor() {
         owner = payable(msg.sender);
-       
     }
 
     function setIsActive () public returns (bool) {

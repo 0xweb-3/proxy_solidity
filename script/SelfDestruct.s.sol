@@ -14,11 +14,11 @@ import {SelfDestruct} from "../src/SelfDestruct.sol";
 
     forge clean && forge build
     forge script  ./script/SelfDestruct.s.sol --rpc-url=127.0.0.1:8545  --broadcast -vvv
-    cast send --rpc-url=127.0.0.1:8545 0x5FC8d32690cc91D4c39d9d3abcBD16989F875707 "setIsActive()"
+    cast call --rpc-url=127.0.0.1:8545 0x8A791620dd6260079BF849Dc5567aDC3F2FdC318 --private-key=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 "setIsActive()(bool)"
  */
 contract SelfDestructScript is Script {
     SelfDestruct public selfDestruct;
-    ProxyAdmin public proxyAdmin;
+    // ProxyAdmin public proxyAdmin;
 
     function setUp() public {
     }
@@ -27,20 +27,21 @@ contract SelfDestructScript is Script {
         // 获取环境变量中的参数
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         // 将私钥转换为地址
-        address deployerAddress = vm.addr(deployerPrivateKey);
+        // address deployerAddress = vm.addr(deployerPrivateKey);
         
         vm.startBroadcast(deployerPrivateKey);
-        proxyAdmin = ProxyAdmin(deployerAddress);
-        console2.log("deployer admin", address(proxyAdmin));
+        // proxyAdmin = ProxyAdmin(deployerAddress);
+        // console2.log("deployer admin", address(proxyAdmin));
 
         selfDestruct = new SelfDestruct();
+        console2.log("deployer at", address(selfDestruct));
 
-        TransparentUpgradeableProxy proxySelfDestruct = new TransparentUpgradeableProxy(
-            address(selfDestruct),
-            address(proxyAdmin),
-            bytes("")        
-        );
-        console2.log("deployer at", address(proxySelfDestruct));
+        // TransparentUpgradeableProxy proxySelfDestruct = new TransparentUpgradeableProxy(
+        //     address(selfDestruct),
+        //     address(proxyAdmin),
+        //     bytes("")        
+        // );
+        // console2.log("deployer at", address(proxySelfDestruct));
         vm.stopBroadcast();
     }
 }
