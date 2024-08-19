@@ -19,7 +19,7 @@ import {TreasureManager} from "../src/TreasureManager.sol";
 // 调用一个合约函数，并写数据
 // cast call --rpc-url=$ETH_RPC_URL --private-key=$PRIVATE_KEY 0x1AF40913c3AeC77b04a19066649c063E4d848D90 "setTokenWhiteList(address)" 0xea3eed8616877F5d3c4aEbf5A799F2e8D6DE9A5E
 
-// cast call --rpc-url=$ETH_RPC_URL --private-key=$PRIVATE_KEY 0x1AF40913c3AeC77b04a19066649c063E4d848D90 
+// cast call --rpc-url=$ETH_RPC_URL --private-key=$PRIVATE_KEY 0x1AF40913c3AeC77b04a19066649c063E4d848D90 "grantReward()"
 contract TreasureManagerScript is Script {
     TreasureManager public treasureManager;
     ProxyAdmin public proxyAdmin;
